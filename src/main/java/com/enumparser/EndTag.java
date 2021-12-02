@@ -10,10 +10,10 @@ import org.xml.sax.SAXException;
  */
 public interface EndTag<T> {
 
-	public abstract void processElement(String namespaceURI, 
-										String sName, 
-										String qName, 
-										String characters,
-										Deque<T> deque) throws SAXException;
+    public abstract void processElement(String namespaceURI, 
+                                        String sName, 
+                                        String qName, 
+                                        String characters,
+                                        Deque<T> deque) throws SAXException;
 
 }

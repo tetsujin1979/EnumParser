@@ -12,24 +12,24 @@ import com.enumparser.book.model.Book;
  */
 public class BookParserTest {
 
-	private BookParser bookParser;
-	
-	@Before
-	public void setup() {
-		
-		bookParser = new BookParser("books.xml");
-		
-	}
-	
-	/**
-	 * Unit test for books.xml
-	 */
-	@Test
-	public void test() {
-			
-		Book book = bookParser.getBookById(1L);
-		assertNotNull("Expected book to not be null", book);
-		
-	}
+    private BookParser bookParser;
+    
+    @Before
+    public void setup() {
+        
+        bookParser = new BookParser("books.xml");
+        
+    }
+    
+    /**
+     * Unit test for books.xml
+     */
+    @Test
+    public void test() {
+            
+        Book book = bookParser.getBookById(1L);
+        assertNotNull("Expected book to not be null", book);
+        
+    }
 
 }

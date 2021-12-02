@@ -11,10 +11,10 @@ import org.xml.sax.SAXException;
  */
 public interface StartTag<T> {
 
-	public abstract void processElement(String namespaceURI, 
-										String lName, 
-										String qName,
-										Attributes attributes,
-										Deque<T> deque) throws SAXException;
+    public abstract void processElement(String namespaceURI, 
+                                        String lName, 
+                                        String qName,
+                                        Attributes attributes,
+                                        Deque<T> deque) throws SAXException;
 
 }

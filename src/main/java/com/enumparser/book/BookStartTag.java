@@ -16,46 +16,46 @@ import com.enumparser.book.model.Book;
  */
 public enum BookStartTag implements StartTag<Book> {
 
-	BOOK("book") {
-		
-		@Override
-		public void processElement(String namespaceURI, 
-								   String lName, 
-								   String qName,
-								   Attributes attributes,
-								   Deque<Book> deque) throws SAXException {
+    BOOK("book") {
+        
+        @Override
+        public void processElement(String namespaceURI, 
+                                   String lName, 
+                                   String qName,
+                                   Attributes attributes,
+                                   Deque<Book> deque) throws SAXException {
 
-			Long id = Long.valueOf(attributes.getValue("id"));
-			Book book = new Book(id);
-			deque.push(book);
+            Long id = Long.valueOf(attributes.getValue("id"));
+            Book book = new Book(id);
+            deque.push(book);
 
-		}
+        }
 
-	};
-	
-	private final String tagName;
+    };
+    
+    private final String tagName;
 
-	// Map of tag names to the enumeration value to process that tag
-	private static final Map<String, BookStartTag> ENUM_MAP =
+    // Map of tag names to the enumeration value to process that tag
+    private static final Map<String, BookStartTag> ENUM_MAP =
             Stream.of(values()).collect(Collectors.toMap(BookStartTag::getTagName, e -> e));
 
-	BookStartTag(String tagName) {
-		
-		this.tagName = tagName;
-				
-	}
-	
-	public String getTagName() {
-		
-		return tagName;
-		
-	}
-	
-	public static BookStartTag fromTagName(String tagName) {
-		
-		return ENUM_MAP.get(tagName);
-		
-	}
-		
+    BookStartTag(String tagName) {
+        
+        this.tagName = tagName;
+                
+    }
+    
+    public String getTagName() {
+        
+        return tagName;
+        
+    }
+    
+    public static BookStartTag fromTagName(String tagName) {
+        
+        return ENUM_MAP.get(tagName);
+        
+    }
+        
 
 }

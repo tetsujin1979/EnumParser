@@ -23,80 +23,80 @@ import com.enumparser.book.model.Book;
  */
 public class BookParser extends DefaultHandler {
 
-	private Deque<Book> deque;
-	
-	private Map<Long, Book> books; 
+    private Deque<Book> deque;
+    
+    private Map<Long, Book> books; 
 
-	private String characters;
-	
-	public BookParser(String fileName) {
-		
-		try {
-			
-			SAXParserFactory factory = SAXParserFactory.newInstance();
-			SAXParser parser = factory.newSAXParser();
-			parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			parser.parse(new File(fileName), this);
-			
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			
-			System.err.print("Exception occured parsing file " + fileName);
-			System.exit(-1);
-			
-		} 
-		
-	}
-	
-	@Override
-	public void startDocument() throws SAXException {
-		
-		this.deque = new ArrayDeque<>();
-		this.books = new HashMap<>();
-		
-	}
-	
-	@Override
-	public void startElement(String namespaceURI, String lName, String qName,
-			Attributes attributes) throws SAXException {
-		
-		BookStartTag bookStartTag = BookStartTag.fromTagName(qName);
-		if (bookStartTag != null) {
-			
-			bookStartTag.processElement(namespaceURI, lName, qName, attributes, deque);
-			
-		}
-		
-	}
+    private String characters;
+    
+    public BookParser(String fileName) {
+        
+        try {
+            
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser parser = factory.newSAXParser();
+            parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            parser.parse(new File(fileName), this);
+            
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            
+            System.err.print("Exception occured parsing file " + fileName);
+            System.exit(-1);
+            
+        } 
+        
+    }
+    
+    @Override
+    public void startDocument() throws SAXException {
+        
+        this.deque = new ArrayDeque<>();
+        this.books = new HashMap<>();
+        
+    }
+    
+    @Override
+    public void startElement(String namespaceURI, String lName, String qName,
+            Attributes attributes) throws SAXException {
+        
+        BookStartTag bookStartTag = BookStartTag.fromTagName(qName);
+        if (bookStartTag != null) {
+            
+            bookStartTag.processElement(namespaceURI, lName, qName, attributes, deque);
+            
+        }
+        
+    }
 
-	@Override
-	public void endElement(String namespaceURI, String sName, String qName)
-			throws SAXException {
-		
-		BookEndTag bookEndTag = BookEndTag.fromTagName(qName);
-		if (bookEndTag != null) {
-			
-			bookEndTag.processElement(namespaceURI, sName, qName, characters, deque);
-			
-		}
-		if (qName.equals("book")) {
-			
-			Book book = deque.pop();
-			books.put(book.getId(), book);
-			
-		}
+    @Override
+    public void endElement(String namespaceURI, String sName, String qName)
+            throws SAXException {
+        
+        BookEndTag bookEndTag = BookEndTag.fromTagName(qName);
+        if (bookEndTag != null) {
+            
+            bookEndTag.processElement(namespaceURI, sName, qName, characters, deque);
+            
+        }
+        if (qName.equals("book")) {
+            
+            Book book = deque.pop();
+            books.put(book.getId(), book);
+            
+        }
 
-	}
+    }
 
-	@Override
-	public void characters(char[] buf, int offset, int len) throws SAXException {
-		this.characters = new String(buf, offset, len);
-	}
+    @Override
+    public void characters(char[] buf, int offset, int len) throws SAXException {
+        this.characters = new String(buf, offset, len);
+    }
 
-	public Book getBookById(Long id) {
-		
-		return books.get(id);
-		
-	}
-	
+    public Book getBookById(Long id) {
+        
+        return books.get(id);
+        
+    }
+    
 }
