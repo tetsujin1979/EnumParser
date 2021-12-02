@@ -1,2 +1,2 @@
 # EnumParser
-Using an enumeration to parse an XML file
+An example of enumeration values to parse an XML file
