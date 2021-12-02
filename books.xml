@@ -1,0 +1,8 @@
+<books>
+	<book id="1">
+		<title>Book 1</title>
+		<author>FirstName1 SurName1</author>
+		<isbn>ISBN 1234-5678</isbn>
+		<publishDate>2000-01-01</publishDate>
+	</book>
+</books>
